@@ -1,0 +1,12 @@
+.BlogHeader{
+	height: 80px;
+	/*background: green;*/
+}
+
+.RowHeight{
+	height: 80px;
+}
+
+.RowTextHeight{
+	line-height: 80px;
+}
