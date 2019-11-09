@@ -5,8 +5,10 @@
   "dependencies": {
     "@material-ui/core": "^4.6.0",
     "antd": "^3.25.0",
+    "jquery": "^3.4.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0"
   },
   "scripts": {

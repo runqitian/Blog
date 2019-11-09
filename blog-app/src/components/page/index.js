@@ -1,3 +1,3 @@
-import Page from './Page'
+import {Page, HomeBody, ArticleBody} from './Page'
 
-export default Page;
+export {Page, HomeBody, ArticleBody};

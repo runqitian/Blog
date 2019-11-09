@@ -1,10 +1,9 @@
 import React from 'react';
 import './Header.css'
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import 'antd/dist/antd.css';
-import { Menu, Icon } from 'antd';
+import { Menu} from 'antd';
+import {Link} from 'react-router-dom'
+
 
 class Header extends React.Component{
 
@@ -13,7 +12,6 @@ class Header extends React.Component{
   	};
 
   	handleClick = e => {
-	    console.log('click ', e);
 	    this.setState({
 	      current: e.key,
 	    });
@@ -22,13 +20,13 @@ class Header extends React.Component{
 	render(){
 		return (
 			<div className="BlogHeader RowHeight">
-				<h1 className="RowTextHeight" style={{"display":"inline", "marginLeft":"20px"}}>Runqi</h1>
+				<Link to={"/"}><h1 className="RowTextHeight" style={{"display":"inline", "marginLeft":"20px"}}>网站</h1></Link>
 				<Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal" className="RowHeight" style={{"float":"right", "marginRight":"20px"}}>
-        			<Menu.Item className="RowHeight" key="blogs">	
-        				<a className="RowTextHeight" style={{"fontSize": "18px"}}>Blogs</a>
+        			<Menu.Item className="RowHeight" key="blogs">
+        				<Link to={"/"}><span className="RowTextHeight" style={{"fontSize": "18px"}}>Blogs</span></Link>
         			</Menu.Item>
         			<Menu.Item className="RowHeight" style={{"marginLeft":"20px"}} key="resources">	
-        				<a className="RowTextHeight" style={{"fontSize": "18px"}}>Resources</a>
+        				<Link to={"/resources"}><span className="RowTextHeight" style={{"fontSize": "18px"}}>Resources</span></Link>
         			</Menu.Item>
         		</Menu>
 			</div>
