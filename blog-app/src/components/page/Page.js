@@ -19,7 +19,7 @@ class ArticleBody extends React.Component{
 
 	render(){
 		return(
-			<Article index={this.props.match.params.index}/>
+			<Article index={this.props.match.params.id}/>
 		)
 	}
 }
