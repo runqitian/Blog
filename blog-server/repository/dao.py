@@ -77,3 +77,4 @@ def get_article_by_id(id):
 	cursor.close()
 	cnx.close()
 	return result
+
