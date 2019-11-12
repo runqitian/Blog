@@ -16,15 +16,16 @@ class Article extends React.Component{
 
 	componentDidMount() {
 		$.ajax({
-			url:'http://localhost:5000/articles',
+			url:'http://localhost:5000/blog/articles',
 			data: {
 				id: this.props.index
 			},
 			success:(data) => {
+				const result = data.content
 				this.setState({
-					title:data.title,
-					tags:data.tags,
-					content:data.content
+					title:result.title,
+					tags:result.tags,
+					content:result.content
 				})
 			}
 		})

@@ -15,7 +15,7 @@ class SideBar extends React.Component{
 
 	componentDidMount(){
 		$.ajax({
-			url:'http://localhost:5000/tags',
+			url:'http://localhost:5000/blog/tags',
 			success: (data) => {
 				this.setState({
 					tags: data.content

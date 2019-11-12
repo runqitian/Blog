@@ -22,7 +22,7 @@ class Content extends React.Component{
 			category = this.props.match.params.category
 		}
 		$.ajax({
-			url:'http://localhost:5000/blogs',
+			url:'http://localhost:5000/blog/blogs',
 			data:{
 				category: category
 			},
@@ -46,7 +46,7 @@ class Content extends React.Component{
 		}
 
 		$.ajax({
-			url:'http://localhost:5000/blogs',
+			url:'http://localhost:5000/blog/blogs',
 			data:{
 				category: category
 			},
