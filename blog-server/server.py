@@ -49,6 +49,12 @@ def insertArticle():
 	return {'success': services.insert_article(title, tags, summary, content)}
 
 
+@app.route('/admin/blog/delete-article')
+def deleteArticle():
+	id = request.args.get('id')
+	result = services.delete_article(id)
+	return {'success': result}
+
 if __name__ == '__main__':
 	app.run()
 

@@ -42,11 +42,11 @@ class Header extends React.Component{
 					</Link>
 				</div>
 				<div style={{"position":"absolute", "bottom":"0px", "right":"0px", "backgroundColor":"transparent"}}>
-					<div className="MenuFontStyle" onClick={() => {window.location="/"}}>
-						<p style={{"display":"inline"}}>Blogs</p>
+					<div className="MenuFontStyle" onClick={() => {window.location=header_link}}>
+						<p style={{"display":"inline", "userSelect": "none"}}>Blogs</p>
 					</div>
 					<div className="MenuFontStyle" onClick={() => {window.location="/resources"}}>
-						<p style={{"display":"inline"}}>Resources</p>
+						<p style={{"display":"inline", "userSelect": "none"}}>Resources</p>
 					</div>
 				</div>
 			</div>

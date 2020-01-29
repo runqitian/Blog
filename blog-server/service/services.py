@@ -35,3 +35,8 @@ def insert_article(title, tags, summary, content):
 	if not dao.insert_tag_article(tags, id):
 		return False
 	return True
+
+def delete_article(id):
+	r1 = dao.delete_article(id)
+	dao.clean_unused_tags()
+	return r1

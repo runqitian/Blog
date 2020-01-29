@@ -36,7 +36,7 @@ class Article extends React.Component{
 		var tags = this.state.tags.map((tag) => {
 			var randomColor = Math.floor(Math.random()*16777215).toString(16);
 			console.log(randomColor)
-			return (<Tag color={"#" + randomColor} style={{'float': 'right'}} key={tag}>tag</Tag>)
+			return (<Tag color={"#" + randomColor} style={{'float': 'right'}} key={tag}>{tag}</Tag>)
 		})
 		return (
 			<div style={{'padding':'20px 50px 20px', 'object-fit':'cover', 'position':'relative'}}>

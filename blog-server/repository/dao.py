@@ -141,4 +141,21 @@ def insert_article(title, summary, content):
 	cnx.close()
 	return record_id
 
+def delete_article(id):
+	cnx = cnxpool.get_connection()
+	cursor = cnx.cursor()
+	query = "delete from articles where id=%s"
+	cursor.execute(query,(id,))
+	result1 = cursor.rowcount
+	print("deleted {} article".format(result1))
+	query = "delete from tag_article where article=%s"
+	cursor.execute(query,(id,))
+	result2 = cursor.rowcount
+	print("deleted {} tag_article".format(result2))
+	cnx.commit()
+	cursor.close()
+	cnx.close()
+	return result1>0;
+
+
 

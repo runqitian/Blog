@@ -64,7 +64,7 @@ class Content extends React.Component{
 
 		if (this.props.admin){
 			var new_button = 
-				<Grid item md={12} sm={12} xs={12} align="center">
+				<Grid item md={12} sm={12} xs={12} align="center" key="new">
 					<Button type="primary" style={{"display": "inline", "width":"80%"}} onClick={() =>{window.location='/admin/article/new'}}>
 						添加
     				</Button>
