@@ -3,6 +3,10 @@ import './Header.css'
 import 'antd/dist/antd.css';
 import { Menu} from 'antd';
 import {Link} from 'react-router-dom'
+import { Typography} from 'antd';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+const {Title} = Typography;
 
 
 class Header extends React.Component{
@@ -18,36 +22,45 @@ class Header extends React.Component{
 	};
 
 	render(){
+		var admin_prefix = ""; 
+		var header_title;
+		var header_link;
+		if (this.props.admin){
+			admin_prefix = "/admin"
+			header_title = "管理员界面"
+			header_link = "/admin"
+		}
+		else{
+			header_title = "网站"
+			header_link = "/"
+		}
 		return (
-			<div className="BlogHeader RowHeight">
-				<Link to={"/"}><h1 className="RowTextHeight" style={{"display":"inline", "marginLeft":"20px"}}>网站</h1></Link>
-				<Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal" className="RowHeight" style={{"float":"right", "marginRight":"20px"}}>
-        			<Menu.Item className="RowHeight" key="blogs">
-        				<Link to={"/"}><span className="RowTextHeight" style={{"fontSize": "18px"}}>Blogs</span></Link>
-        			</Menu.Item>
-        			<Menu.Item className="RowHeight" style={{"marginLeft":"20px"}} key="resources">	
-        				<Link to={"/resources"}><span className="RowTextHeight" style={{"fontSize": "18px"}}>Resources</span></Link>
-        			</Menu.Item>
-        		</Menu>
+			<div className="BlogHeader" style={{"backgroundImage":"url(/header.jpg)","backgroundSize": "100% 100%"}}>
+				<div style={{"position":"absolute", "left":"20px", "top":"40px"}}>
+					<Link to={header_link}>
+						<h1>{header_title}</h1>
+					</Link>
+				</div>
+				<div style={{"position":"absolute", "bottom":"0px", "right":"0px", "backgroundColor":"transparent"}}>
+					<div className="MenuFontStyle" onClick={() => {window.location="/"}}>
+						<p style={{"display":"inline"}}>Blogs</p>
+					</div>
+					<div className="MenuFontStyle" onClick={() => {window.location="/resources"}}>
+						<p style={{"display":"inline"}}>Resources</p>
+					</div>
+				</div>
 			</div>
 			)
 	}
+
+	// <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal" theme="dark" className="RowHeight" style={{"position":"absolute", "bottom":"0px", "right":"0px", "backgroundColor":"transparent", "color":"white"}}>
+ //        			<Menu.Item className="RowHeight" key="blogs" style={{"color":"white"}}>
+ //        				<Link to={admin_prefix + "/"}><span className="RowTextHeight" style={{"fontSize": "18px"}}>Blogs</span></Link>
+ //        			</Menu.Item>
+ //        			<Menu.Item className="RowHeight" style={{"marginLeft":"20px"}} key="resources">	
+ //        				<Link to={admin_prefix + "/resources"}><span className="RowTextHeight" style={{"fontSize": "18px"}}>Resources</span></Link>
+ //        			</Menu.Item>
+ //        		</Menu>
 }
 
 export default Header;
-
-
-/**
-<Paper square style={{"height": "100px", "float": "right"}}>
-				<Tabs
-					style={{"height": "100px", "float": "right"}}
-				    value="any"
-				    indicatorColor="primary"
-				    textColor="primary"
-				    centered
-				>
-				    <Tab style={{"height": "100px"}} label="Blogs" />
-				    <Tab style={{"height": "100px"}} label="Resources" />
-				</Tabs>
-				</Paper>
-**/

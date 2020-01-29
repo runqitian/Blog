@@ -18,29 +18,38 @@ class BlogCard extends React.Component{
 		};
 	}
 
-
 	render(){
+		var action_part;
+		if (this.props.admin){
+			action_part = (<Link to={'/admin/article/' + this.props.index}>
+						   <Button size="small">Edit</Button>
+						</Link>)
+		}
+		else{
+			action_part = (<Link to={'/article/' + this.props.index}>
+						   <Button size="small">Learn more</Button>
+						</Link>)
+		}
 
 		return (
-		    <Card className={"card"} style={{backgroundColor: "#fdfffd"}}>
+		    <Card className={"card"} style={{"backgroundImage":"url(/cloudy-day.png)", "background-attachment":"fixed"}}>
 		      <CardContent>
 		        <Typography variant="h5" component="h2" style={{"marginLeft":"20px"}}>
 					{this.props.title}
 		        </Typography>
 		        <br/>
 		        <Typography variant="body2" component="p" style={{"marginLeft":"20px"}}>
-					{this.props.title}
+					{this.props.summary}
 		        </Typography>
 		      </CardContent>
 		      <CardActions style={{"float":"right", "marginRight":"20px"}}>
-		      	<Link to={'/article/' + this.props.index}>
-		        <Button size="small">Learn More</Button>
-		        </Link>
+		      	{action_part}
 		      </CardActions>
 		    </Card>
 		 );
 
 	}
 }
+
 
 export default BlogCard;

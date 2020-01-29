@@ -1,3 +1,3 @@
-import {Page, HomeBody, ArticleBody} from './Page'
+import {Page, HomeBody, ArticleBody, AdminPage} from './Page'
 
-export {Page, HomeBody, ArticleBody};
+export {Page, HomeBody, ArticleBody, AdminPage};

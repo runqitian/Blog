@@ -68,13 +68,77 @@ def get_blogs_all():
 def get_article_by_id(id):
 	cnx = cnxpool.get_connection()
 	cursor = cnx.cursor()
-	query = 'select r1.title, tags.tag, r1.content from (select id,title, content from articles where id={}) as r1 inner join tag_article on r1.id=tag_article.article inner join tags on tags.id = tag_article.tag'.format(id)
+	query = 'select r1.title, tags.tag, r1.summary, r1.content from (select id, title, summary, content from articles where id={}) as r1 inner join tag_article on r1.id=tag_article.article inner join tags on tags.id = tag_article.tag'.format(id)
 	cursor.execute(query)
 	tags = []
-	for (title, tag, content  ) in cursor:
+	for (title, tag, summary, content  ) in cursor:
 		tags.append(tag)
-	result = {'title': title, 'tags':tags, 'content':content}
+	result = {'title': title, 'tags':tags, 'summary':summary, 'content':content}
 	cursor.close()
 	cnx.close()
 	return result
+
+def insert_tags_ignore(tags):
+	cnx = cnxpool.get_connection()
+	cursor = cnx.cursor()
+	tags = [(item,) for item in tags]
+	query = 'insert ignore into tags (tag) values(%s)'
+	cursor.executemany(query, tags)
+	print('inserted {} rows.'.format(cursor.rowcount))
+	cnx.commit()
+	cursor.close()
+	cnx.close()
+	return
+
+def insert_tag_article(tags, id):
+	cnx = cnxpool.get_connection()
+	cursor = cnx.cursor()
+	str_tags = ', '.join('"{}"'.format(each) for each in tags)
+	query = 'delete from tag_article where article=%s'
+	cursor.execute(query, (id,))
+	print('deleted {} rows.'.format(cursor.rowcount))
+	query = 'insert ignore into tag_article select id,%s as "article" from tags where tag in (' + str_tags + ')'
+	cursor.execute(query, (id,))
+	print('inserted {} rows.'.format(cursor.rowcount))
+	cnx.commit()
+	cursor.close()
+	cnx.close()
+	return True
+
+def clean_unused_tags():
+	cnx = cnxpool.get_connection()
+	cursor = cnx.cursor()
+	query = 'delete from tags where id not in (select distinct tag from tag_article)'
+	cursor.execute(query)
+	print('deleted {} unused tags.'.format(cursor.rowcount))
+	cnx.commit()
+	cursor.close()
+	cnx.close()
+	return True
+
+def update_article_by_id(id, title, summary, content):
+	cnx = cnxpool.get_connection()
+	cursor = cnx.cursor()
+	query = 'update articles set title=%s, summary=%s, content=%s where id=%s'
+	cursor.execute(query, (title, summary, content, id))
+	print('updated {} rows.'.format(cursor.rowcount))
+	cnx.commit()
+	cursor.close()
+	cnx.close()
+	return True
+
+def insert_article(title, summary, content):
+	cnx = cnxpool.get_connection()
+	cursor = cnx.cursor()
+	query = 'insert into articles (title, summary, content) values (%s, %s, %s)'
+	cursor.execute(query, (title, summary, content))
+	print('inserted {} rows.'.format(cursor.rowcount))
+	record_id = -1
+	if cursor.rowcount > 0:
+		record_id = cursor.lastrowid
+	cnx.commit()
+	cursor.close()
+	cnx.close()
+	return record_id
+
 

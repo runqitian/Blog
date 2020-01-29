@@ -30,6 +30,25 @@ def getArticleById():
 	return services.get_article_by_id(id)
 
 
+@app.route('/admin/blog/update-article')
+def updateArticleById():
+	id = request.args.get('id')
+	title = request.args.get('title')
+	tags = request.args.get('tags')
+	summary = request.args.get('summary')
+	content = request.args.get('content')
+	return {'success': services.update_article_by_id(id, title, tags, summary, content)}
+
+
+@app.route('/admin/blog/insert-article')
+def insertArticle():
+	title = request.args.get('title')
+	tags = request.args.get('tags')
+	summary = request.args.get('summary')
+	content = request.args.get('content')
+	return {'success': services.insert_article(title, tags, summary, content)}
+
+
 if __name__ == '__main__':
 	app.run()
 

@@ -3,6 +3,7 @@ import React from "react"
 import Grid from '@material-ui/core/Grid';
 import BlogCard from "./BlogCard"
 import $ from 'jquery'
+import { Button } from 'antd';
 
 class Content extends React.Component{
 	
@@ -16,7 +17,7 @@ class Content extends React.Component{
 
 	componentDidMount(prevProps, prevState){
 		var category = ''
-		if (this.props.match.path === '/'){
+		if (this.props.match.path === '/' || this.props.match.path === '/admin'){
 			category = ''
 		}else{
 			category = this.props.match.params.category
@@ -39,7 +40,7 @@ class Content extends React.Component{
 			return;
 		}
 		var category = ''
-		if (this.props.match.path === '/'){
+		if (this.props.match.path === '/' || this.props.match.path === '/admin'){
 			category = ''
 		}else{
 			category = this.props.match.params.category
@@ -59,11 +60,31 @@ class Content extends React.Component{
 	}
 
 	render(){
-		var cards = this.state.blogs.map((blog) => (
-			<Grid item md={12} sm={12} xs={12} key={blog.id}>
-				<BlogCard title={blog.title} summary={blog.summary} index={blog.id}/>
-			</Grid>)
-		)
+		var cards;
+
+		if (this.props.admin){
+			var new_button = 
+				<Grid item md={12} sm={12} xs={12} align="center">
+					<Button type="primary" style={{"display": "inline", "width":"80%"}} onClick={() =>{window.location='/admin/article/new'}}>
+						添加
+    				</Button>
+    			</Grid>
+			// console.log(this.state.blogs)
+			cards = this.state.blogs.map((blog) => (
+				<Grid item md={12} sm={12} xs={12} key={blog.id}>
+					<BlogCard title={blog.title} summary={blog.summary} index={blog.id} admin/>
+				</Grid>)
+			)
+			cards = cards.concat(new_button)
+		}
+		else{
+			cards = this.state.blogs.map((blog) => (
+				<Grid item md={12} sm={12} xs={12} key={blog.id}>
+					<BlogCard title={blog.title} summary={blog.summary} index={blog.id}/>
+				</Grid>)
+			)
+		}
+
 		return (
 			<Grid
 				container

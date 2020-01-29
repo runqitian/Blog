@@ -39,15 +39,15 @@ class Article extends React.Component{
 			return (<Tag color={"#" + randomColor} style={{'float': 'right'}} key={tag}>tag</Tag>)
 		})
 		return (
-			<div style={{'padding':'20px 50px 20px'}}>
+			<div style={{'padding':'20px 50px 20px', 'object-fit':'cover', 'position':'relative'}}>
 				<div>
 					<Title style={{'paddingBottom':'20px', 'textAlign':'center'}}>{this.state.title}</Title>
 				</div>
 				<div>
 					{tags}
 				</div>
-				<div style={{'paddingTop':'50px'}}>
-					<ReactMarkdown source={this.state.content} />
+				<div style={{'paddingTop':'50px', 'object-fit':'cover', 'position':'relative'}}>
+					<ReactMarkdown source={this.state.content} escapeHtml={false}/>
 				</div>
 			</div>
 		)

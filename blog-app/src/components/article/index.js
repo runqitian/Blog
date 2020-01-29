@@ -1,3 +1,4 @@
 import Article from './Article'
+import EditArticle from './EditArticle'
 
-export default Article
+export {Article, EditArticle}

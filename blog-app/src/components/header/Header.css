@@ -1,5 +1,7 @@
 .BlogHeader{
-	height: 80px;
+	width:100%;
+	padding-bottom: 28.8%;
+	position: relative;
 	/*background: green;*/
 }
 
@@ -9,4 +11,19 @@
 
 .RowTextHeight{
 	line-height: 80px;
+}
+
+.MenuFontStyle {
+	line-height: 60px;
+	vertical-align: middle;
+	padding: 10px 10px;
+	text-align: center;
+	display: inline;
+	font-size: 18px;
+	color: #DCDCDC;
+}
+
+.MenuFontStyle:hover {
+	color: #0099ff;
+	border-bottom: 2px solid;
 }

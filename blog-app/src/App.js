@@ -1,6 +1,6 @@
 import React from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import {Page, HomeBody, ArticleBody} from './components/page'
+import {Page, HomeBody, ArticleBody, AdminPage} from './components/page'
 
 
 // class Home1 extends React.Component{
@@ -44,12 +44,18 @@ class App extends React.Component{
 
 	render(){
 		return (
-			<Router>
-				<Page>
-					<Route exact path="/article/:id" component={ArticleBody} />
-					<Route exact path={['/posts/:category', '/']} component={HomeBody} />
-				</Page>
-			</Router>
+			<div style={{"backgroundImage":"url(/blue-snow.png)", "backgroundRepeat": "repeat", "height":"100%", overflowX: "scroll"}}>
+				<Router>
+					<Route exact path={['/admin/resources', '/admin/article/*', '/admin/posts/*','/admin']} component={AdminPage} />
+					<Route exact path={['/resources', '/article/*', '/posts/*', '/']} component={Page} />
+					{/*
+					<Page>
+						<Route exact path="/article/:id" component={ArticleBody} />
+						<Route exact path={['/posts/:category', '/']} component={HomeBody} />
+					</Page>
+					*/}
+				</Router>
+			</div>
 		)
 
 

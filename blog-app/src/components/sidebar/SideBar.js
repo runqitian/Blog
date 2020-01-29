@@ -41,15 +41,22 @@ class SideBar extends React.Component{
 	// }
 
 	render(){
+		var tag_url;
+		if (this.props.admin){
+			tag_url = '/admin/posts/'
+		}
+		else{
+			tag_url = '/posts/'
+		}
 		return (
 			<List
 			    itemLayout="horizontal"
 			    style={{"marginTop":"25px"}}
 			    dataSource={this.state.tags}
 			    renderItem={item => (
-			      <List.Item style={{"height":"60px"}}>
+			      <List.Item style={{"height":"60px"}} align="left">
 			        <List.Item.Meta
-			          title={<Link to={"/posts/"+item}><span>{item}</span></Link>}
+			          title={<Link to={tag_url + item}><span>{item}</span></Link>}
 			        />
 			      </List.Item>
 			    )}
