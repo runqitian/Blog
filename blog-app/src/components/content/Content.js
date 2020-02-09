@@ -18,18 +18,18 @@ class Content extends React.Component{
 	componentDidMount(prevProps, prevState){
 		var category = ''
 		if (this.props.match.path === '/' || this.props.match.path === '/admin'){
-			category = ''
+			category = ""
 		}else{
 			category = this.props.match.params.category
 		}
 		$.ajax({
-			url:'http://localhost:5000/blog/blogs',
+			url:'/api/blog/views',
 			data:{
-				category: category
+				tag: category
 			},
 			success: (data) => {
 				this.setState({
-					blogs:data.content
+					blogs:data
 				})
 			}
 		})
@@ -47,13 +47,13 @@ class Content extends React.Component{
 		}
 
 		$.ajax({
-			url:'http://localhost:5000/blog/blogs',
+			url:'/api/blog/views',
 			data:{
-				category: category
+				tag: category
 			},
 			success: (data) => {
 				this.setState({
-					blogs:data.content
+					blogs:data
 				})
 			}
 		})

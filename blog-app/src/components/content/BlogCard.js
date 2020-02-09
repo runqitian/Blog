@@ -23,16 +23,21 @@ class BlogCard extends React.Component{
 	handleDelete() {
 		console.log(this.props.index)
 		$.ajax({
-			url:'http://localhost:5000/admin/blog/delete-article',
-			data:{
-				id: this.props.index
+			url:'/api/blog/article/' + this.props.index,
+			type:"DELETE",
+			headers: { 
+			    "x-access-token" : localStorage.getItem("token")
 			},
 			success: (data) => {
-				console.log(data.success)
+				console.log(data)
+				window.location.reload();
+				message.info('删除成功');
+			},
+			error: (err) => {
+				message.info('删除失败');
+
 			}
 		})
-		window.location.reload();
-		message.info('This is a normal message');
 	}
 
 	render(){

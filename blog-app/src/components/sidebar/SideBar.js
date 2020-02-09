@@ -15,10 +15,10 @@ class SideBar extends React.Component{
 
 	componentDidMount(){
 		$.ajax({
-			url:'http://localhost:5000/blog/tags',
+			url:'/api/blog/tags',
 			success: (data) => {
 				this.setState({
-					tags: data.content
+					tags: data
 				})
 			}
 		})
@@ -56,7 +56,7 @@ class SideBar extends React.Component{
 			    renderItem={item => (
 			      <List.Item style={{"height":"60px"}} align="left">
 			        <List.Item.Meta
-			          title={<Link to={tag_url + item}><span>{item}</span></Link>}
+			          title={<Link to={tag_url + item.tag}><span>{item.tag}</span></Link>}
 			        />
 			      </List.Item>
 			    )}

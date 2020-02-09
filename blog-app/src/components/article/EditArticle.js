@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactMarkdown from "react-markdown";
 import $ from 'jquery'
+import axios from 'axios'
 import { Tag } from 'antd';
 import { Typography, Input, Divider, Button } from 'antd';
 
@@ -23,13 +24,10 @@ class EditArticle extends React.Component{
 			return
 		}
 		$.ajax({
-			url:'http://localhost:5000/blog/articles',
-			data: {
-				id: this.props.index
-			},
+			url:'/api/blog/article/' + this.props.index,
 			async:false,
 			success:(data) => {
-				const result = data.content
+				const result = data
 				this.setState({
 					title:result.title,
 					tags:result.tags,
@@ -48,40 +46,49 @@ class EditArticle extends React.Component{
 		// console.log(document.getElementById("titleInput").value)
 		if (this.props.index === 'new'){
 			$.ajax({
-				url:'http://localhost:5000/admin/blog/insert-article',
-				data: {
+				url:'/api/blog/articles',
+				type:"post",
+				headers: { 
+					"Content-Type": "application/json",
+				    "x-access-token" : localStorage.getItem("token")
+				},
+				data: JSON.stringify({
 					title: title,
 					tags: tags,
 					summary: summary,
 					content: content
-				},
+				}),
 				async:false,
 				success:(data) => {
-					const result = data.success
-					if (result){
-						alert('添加完成！')
-						window.location = '/admin'
-					}
+					alert('添加完成！')
+					window.location = '/admin'
+				},
+				error:(err) => {
+					alert("添加失败")
 				}
 			})
 		}
 		else{
 			$.ajax({
-				url:'http://localhost:5000/admin/blog/update-article',
-				data: {
-					id: this.props.index,
+				url:'/api/blog/article/' + this.props.index,
+				type:"put",
+				headers: { 
+					"Content-Type": "application/json",
+				    "x-access-token" : localStorage.getItem("token")
+				},
+				data: JSON.stringify({
 					title: title,
 					tags: tags,
 					summary: summary,
 					content: content
-				},
+				}),
 				async:false,
 				success:(data) => {
-					const result = data.success
-					if (result){
-						alert('修改完成！')
-						window.location = '/admin'
-					}
+					alert('修改完成！')
+					window.location = '/admin'
+				},
+				error:(err) => {
+					alert("修改失败")
 				}
 			})
 		}

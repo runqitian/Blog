@@ -16,12 +16,9 @@ class Article extends React.Component{
 
 	componentDidMount() {
 		$.ajax({
-			url:'http://localhost:5000/blog/articles',
-			data: {
-				id: this.props.index
-			},
+			url:'/api/blog/article/' + this.props.index,
 			success:(data) => {
-				const result = data.content
+				const result = data
 				this.setState({
 					title:result.title,
 					tags:result.tags,
@@ -35,18 +32,18 @@ class Article extends React.Component{
 		const { Title } = Typography;
 		var tags = this.state.tags.map((tag) => {
 			var randomColor = Math.floor(Math.random()*16777215).toString(16);
-			console.log(randomColor)
+			console.log(tag)
 			return (<Tag color={"#" + randomColor} style={{'float': 'right'}} key={tag}>{tag}</Tag>)
 		})
 		return (
-			<div style={{'padding':'20px 50px 20px', 'object-fit':'cover', 'position':'relative'}}>
+			<div style={{'padding':'20px 50px 20px', 'objectFit':'cover', 'position':'relative'}}>
 				<div>
 					<Title style={{'paddingBottom':'20px', 'textAlign':'center'}}>{this.state.title}</Title>
 				</div>
 				<div>
 					{tags}
 				</div>
-				<div style={{'paddingTop':'50px', 'object-fit':'cover', 'position':'relative'}}>
+				<div style={{'paddingTop':'50px', 'objectFit':'cover', 'position':'relative'}}>
 					<ReactMarkdown source={this.state.content} escapeHtml={false}/>
 				</div>
 			</div>

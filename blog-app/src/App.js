@@ -1,59 +1,83 @@
-import React from 'react'
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import {Page, HomeBody, ArticleBody, AdminPage} from './components/page'
+import React, { useState, useEffect } from 'react'
+import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
+import {Page, HomeBody, ArticleBody, AdminPage, LoginPage} from './components/page'
+import {AuthContext, useAuth} from './context/Auth';
+import cookie from "react-cookie";
+import LoadingIcon from "./components/loading"
 
 
-// class Home1 extends React.Component{
-//
-// 	constructor(){
-// 		super();
-// 		this.state = {
-// 			id : ''
-// 		}
-// 	}
-//
-// 	componentWillMount() {
-// 		this.state.id = 'mount ' + this.props.match.params.id;
-// 	}
-//
-// 	componentWillUpdate() {
-// 		console.log('after update')
-// 		this.state.id = 'update ' + this.props.match.params.id
-// 	}
-//
-// 	render(){
-// 		return (
-// 			<div>
-// 				<h1 dangerouslySetInnerHTML={{__html:'hello, Home1 ' + this.state.id}}></h1>
-// 			</div>
-// 		)
-// 	}
-// }
-//
-// class Home2 extends React.Component{
-// 	render(){
-// 		return (
-// 			<div>
-// 				<h1> hello, Home2! </h1>
-// 			</div>
-// 		)
-// 	}
-// }
+import axios from 'axios';
+
+const TokenRequired = () => {
+
+	const [status, setStatus] = useState({
+		auth: false,
+		waiting: true
+	});
+
+	useEffect(() => {
+		console.log(status.waiting)
+		console.log("auth is " + status.auth)
+		console.log("middle mounted")
+	})
+
+	const tokenCheck = async () => {
+		const token = localStorage.getItem("token")
+		if (!token){
+			setStatus({
+				auth: false,
+				waiting: false
+			})
+		}
+		var res = await axios.get("/api/blog/authstate", 
+			{
+				headers: {'x-access-token': token}
+			}	
+		).then(res => {
+			if (res.status == 200){
+				setStatus({
+					auth: true,
+					waiting: false
+				})
+			}
+		}).catch(error => {
+			setStatus({
+				auth: false,
+				waiting: false
+			})		})
+	}
+
+	if (status.waiting){
+		tokenCheck()
+		return <LoadingIcon/>
+	}else{
+		console.log("finised")
+		if (status.auth == false){
+			window.location="/login"
+		}else{
+			return <AdminPage/>
+		}
+	}
+}
 
 class App extends React.Component{
 
+	constructor(props){
+		super(props);
+		this.state = {
+			auth : false
+		}
+
+	}
+	
 	render(){
+		// <PrivateRoute exact path={['/admin/resources', '/admin/article/*', '/admin/posts/*','/admin']} component={AdminPage} />
 		return (
 			<div style={{"backgroundImage":"url(/blue-snow.png)", "backgroundRepeat": "repeat", "height":"100%", overflowX: "scroll"}}>
 				<Router>
-					<Route exact path={['/admin/resources', '/admin/article/*', '/admin/posts/*','/admin']} component={AdminPage} />
+					<Route exact path={['/admin/resources', '/admin/article/*', '/admin/posts/*','/admin']} component={TokenRequired} />
 					<Route exact path={['/resources', '/article/*', '/posts/*', '/']} component={Page} />
-					{/*
-					<Page>
-						<Route exact path="/article/:id" component={ArticleBody} />
-						<Route exact path={['/posts/:category', '/']} component={HomeBody} />
-					</Page>
-					*/}
+					<Route exact path={['/login']} component={LoginPage} />
 				</Router>
 			</div>
 		)
