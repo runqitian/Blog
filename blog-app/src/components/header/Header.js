@@ -31,7 +31,7 @@ class Header extends React.Component{
 			header_link = "/admin"
 		}
 		else{
-			header_title = "网站"
+			header_title = ""
 			header_link = "/"
 		}
 		return (

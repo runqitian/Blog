@@ -13,3 +13,12 @@ class UserDao(DaoManager):
         if row == None:
             return False
         return row[0] == password
+
+    def get_site_config(self):
+        query = "select * from configs"
+        self.cursor.execute(query)
+        rows = self.cursor.fetchall()
+        result = {}
+        for row in rows:
+            result[row[0]] = row[1]
+        return result
