@@ -5,13 +5,14 @@ from errors import ConnectionNotAvailableError
 from .ArticleDao import ArticleDao
 from .UserDao import UserDao
 from .Base import DaoManager
+import os
 
 class DaoFactory:
 
-	user = 'root'
-	pwd = 'trq371402'
-	host = 'localhost'
-	db = 'blog'
+	user = os.getenv("DB_USER")
+	pwd = os.getenv("DB_PASSWORD")
+	host = os.getenv("DB_HOST")
+	db = os.getenv("DB_NAME")
 	result = []
 
 	cnxpool = pooling.MySQLConnectionPool(pool_name='blogdbpool',
