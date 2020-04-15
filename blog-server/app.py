@@ -2,10 +2,11 @@ import sys
 import jwt
 import time
 import os
-os.environ["DB_USER"] = 'root'
-os.environ['DB_PASSWORD'] = 'trq371402'
-os.environ['DB_HOST'] = '0.0.0.0'
-os.environ['DB_NAME'] = 'blog'
+if os.getenv('DB_USER') == None:
+    os.environ["DB_USER"] = 'root'
+    os.environ['DB_PASSWORD'] = 'trq371402'
+    os.environ['DB_HOST'] = '0.0.0.0'
+    os.environ['DB_NAME'] = 'blog'
 
 
 from flask import Flask, request, make_response, jsonify, json
