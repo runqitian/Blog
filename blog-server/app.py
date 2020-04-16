@@ -4,14 +4,20 @@ import time
 import os
 if os.getenv('DB_USER') == None:
     os.environ["DB_USER"] = 'root'
+if os.getenv('DB_PASSWORD') == None:
     os.environ['DB_PASSWORD'] = 'trq371402'
-    os.environ['DB_HOST'] = '0.0.0.0'
+if os.getenv('DB_HOST') == None:
+    os.environ['DB_HOST'] = 'blog_db'
+if os.getenv('DB_NAME') == None:
     os.environ['DB_NAME'] = 'blog'
 
 
 from flask import Flask, request, make_response, jsonify, json
 from flask_cors import CORS
 from functools import wraps
+
+from daos import DaoFactory
+DaoFactory.setup_db_connection()
 
 import services
 
@@ -162,4 +168,4 @@ def login():
 
 
 if __name__ == '__main__':
-	app.run(host='0.0.0.0', debug=True)
+	app.run(host='0.0.0.0')

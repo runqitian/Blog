@@ -9,6 +9,10 @@ WORKDIR /opt/blog-server
 
 RUN pip3 install -r requirements.txt
 
-ENTRYPOINT ["python3"]
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
 
-CMD ["app.py"]
+ENV FLASK_APP=/opt/blog-server/app.py
+
+ENTRYPOINT ["flask", "run", "--host=0.0.0.0"]
+
