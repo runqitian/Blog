@@ -1,12 +1,7 @@
 import React from 'react';
 import './Header.css'
 import 'antd/dist/antd.css';
-import { Menu} from 'antd';
 import {Link} from 'react-router-dom'
-import { Typography} from 'antd';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-const {Title} = Typography;
 
 
 class Header extends React.Component{
@@ -22,11 +17,9 @@ class Header extends React.Component{
 	};
 
 	render(){
-		var admin_prefix = ""; 
 		var header_title;
 		var header_link;
 		if (this.props.admin){
-			admin_prefix = "/admin"
 			header_title = "管理员界面"
 			header_link = "/admin"
 		}

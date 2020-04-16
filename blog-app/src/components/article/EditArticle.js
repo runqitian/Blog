@@ -1,12 +1,8 @@
 import React from 'react'
-import ReactMarkdown from "react-markdown";
 import $ from 'jquery'
-import axios from 'axios'
-import { Tag } from 'antd';
 import { Typography, Input, Divider, Button } from 'antd';
 
 const { TextArea } = Input;
-const { Title } = Typography;
 
 class EditArticle extends React.Component{
 	constructor(){
@@ -103,11 +99,6 @@ class EditArticle extends React.Component{
 		var content = this.state.content
 		console.log(content);
 		const { Title } = Typography;
-		var tags = this.state.tags.map((tag) => {
-			var randomColor = Math.floor(Math.random()*16777215).toString(16);
-			console.log(randomColor)
-			return (<Tag color={"#" + randomColor} style={{'float': 'right'}} key={tag}>tag</Tag>)
-		})
 		return (
 			<div style={{'padding':'20px 50px 20px', 'position':'relative'}}>
 				<div>

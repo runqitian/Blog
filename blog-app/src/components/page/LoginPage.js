@@ -1,20 +1,12 @@
 import React from 'react';
 
-import {Route} from 'react-router-dom';
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-
-import Header from "../header"
-import SideBar from "../sidebar"
-import Content from "../content"
-import {Article, EditArticle} from "../article"
 import { Input } from 'antd';
 import { Button } from 'antd';
 import { Alert } from 'antd';
 
 import { AuthContext } from "../../context/Auth";
 
-import $ from 'jquery';
 import sha256 from 'sha256'
 
 class LoginPage extends React.Component{
@@ -40,7 +32,7 @@ class LoginPage extends React.Component{
 	      method: 'POST',
 	      body: data,
 	    }).then(response => {
-	    	if (response.status == 200){
+	    	if (response.status === 200){
 	    		response.json().then(data => {
 	    			localStorage.setItem('token', data['token']);
 	    			window.location = "/admin"

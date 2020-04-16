@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
-import {Page, HomeBody, ArticleBody, AdminPage, LoginPage} from './components/page'
-import {AuthContext, useAuth} from './context/Auth';
-import cookie from "react-cookie";
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {Page, AdminPage, LoginPage} from './components/page'
 import LoadingIcon from "./components/loading"
 
 
@@ -29,12 +27,12 @@ const TokenRequired = () => {
 				waiting: false
 			})
 		}
-		var res = await axios.get("/api/blog/authstate", 
+		await axios.get("/api/blog/authstate",
 			{
 				headers: {'x-access-token': token}
 			}	
 		).then(res => {
-			if (res.status == 200){
+			if (res.status === 200){
 				setStatus({
 					auth: true,
 					waiting: false
@@ -51,8 +49,7 @@ const TokenRequired = () => {
 		tokenCheck()
 		return <LoadingIcon/>
 	}else{
-		console.log("finised")
-		if (status.auth == false){
+		if (status.auth === false){
 			window.location="/login"
 		}else{
 			return <AdminPage/>
