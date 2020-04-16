@@ -2,6 +2,7 @@ FROM ubuntu
 
 RUN apt-get update -y
 RUN apt-get install -y python3.7 && apt-get install -y python3-pip
+RUN apt-get install -y netcat
 
 COPY . /opt/blog-server/
 
@@ -14,5 +15,5 @@ ENV LANG=C.UTF-8
 
 ENV FLASK_APP=/opt/blog-server/app.py
 
-ENTRYPOINT ["flask", "run", "--host=0.0.0.0"]
+ENTRYPOINT ["./ready_check.sh"]
 

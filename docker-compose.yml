@@ -2,17 +2,34 @@ version: '3.7'
 services:
     blog_db:
         image: mysql
+        container_name: "blog_db"
         ports:
             - "3306:3306"
         environment:
             - MYSQL_ROOT_PASSWORD=trq371402
         volumes:
+            #- type: bind
+              #source: /home/runqi/Workspace/Blog/db/
+              #target: /docker-entrypoint-initdb.d/
             - type: bind
-              source: /home/runqi/Workspace/Blog/db/
-              target: /docker-entrypoint-initdb.d/
-    blog_server:
-        image: testimg
+              source: /opt/blogdb
+              target: /var/lib/mysql
+    blog_backend:
+        image: runqi/blog_backend
+        container_name: "blog_backend"
         ports:
             - "5000:5000"
         depends_on:
             - "blog_db"
+        links:
+            - "blog_db"
+    blog_front:
+        image: runqi/blog_front
+        container_name: "blog_front"
+        ports:
+            - "80:80"
+        depends_on:
+            - "blog_db"
+            - "blog_backend"
+        links:
+            - "blog_backend"
