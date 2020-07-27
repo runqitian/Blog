@@ -41,6 +41,9 @@ class Header extends React.Component{
 					<div className="MenuFontStyle" onClick={() => {window.location="/resources"}}>
 						<p style={{"display":"inline", "userSelect": "none"}}>Resources</p>
 					</div>
+					<div className="MenuFontStyle" onClick={() => {window.location="/live"}}>
+						<p style={{"display":"inline", "userSelect": "none"}}>Live</p>
+					</div>
 				</div>
 			</div>
 			)

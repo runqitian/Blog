@@ -1,3 +1,4 @@
 import Content from "./Content"
+import LiveContent from "./LiveContent"
 
-export default Content
+export {Content, LiveContent};
