@@ -52,7 +52,13 @@ const TokenRequired = () => {
 		if (status.auth === false){
 			window.location="/login"
 		}else{
-			return <AdminPage/>
+			return (
+				<div>
+					<Route exact path={['/admin/resources', '/admin/article/*', '/admin/posts/*','/admin']} component={AdminPage} />
+					<Route exact path={['/live']} component={Page} />
+				</div>
+			)
+			// return <AdminPage/>
 		}
 	}
 }
@@ -73,7 +79,8 @@ class App extends React.Component{
 			<div style={{"backgroundImage":"url(/blue-snow.png)", "backgroundRepeat": "repeat", "height":"100%", overflowX: "scroll"}}>
 				<Router>
 					<Route exact path={['/admin/resources', '/admin/article/*', '/admin/posts/*','/admin']} component={TokenRequired} />
-					<Route exact path={['/resources', '/article/*', '/posts/*', '/']} component={Page} />
+					<Route exact path={['/resources', '/live', '/article/*', '/posts/*', '/']} component={Page} />
+					<Route exact path={['/live']} component={TokenRequired} />
 					<Route exact path={['/login']} component={LoginPage} />
 				</Router>
 			</div>

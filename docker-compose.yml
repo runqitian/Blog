@@ -33,3 +33,7 @@ services:
             - "blog_backend"
         links:
             - "blog_backend"
+        volumes:
+            - type: bind
+              source: /opt/blog_share
+              target: /opt/blog_share

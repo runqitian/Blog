@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 
 import Header from "../header"
 import SideBar from "../sidebar"
-import Content from "../content"
+import {Content, LiveContent} from "../content"
 import {Article, EditArticle} from "../article"
 
 class ArticleBody extends React.Component{
@@ -151,6 +151,21 @@ class ResourcesBody extends React.Component{
 	}
 }
 
+class LiveBody extends React.Component{
+	constructor(){
+		super();
+		this.state = {
+
+		}
+	}
+
+	render(){
+		return (
+			<LiveContent/>
+		)
+	}
+}
+
 class Page extends React.Component{
 	constructor(){
 		super();
@@ -167,6 +182,7 @@ class Page extends React.Component{
 				{/*{this.props.children}*/}
 					<Route exact path="/article/:id" component={ArticleBody} />
 					<Route exact path={['/resources']} component={ResourcesBody} />
+					<Route exact path={['/live']} component={LiveBody} />
 					<Route exact path={['/posts/:category', '/']} component={HomeBody} />
 				</div>
 			</Container>
