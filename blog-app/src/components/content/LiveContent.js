@@ -6,23 +6,22 @@ class LiveContent extends React.Component {
 		super();
     	this.state = {
         	video: {
-	            src: "http://runqitian.com/resources/live.m3u8",
+	            src: "resources/live.m3u8",
 	        }
     	}
 	}
 
   	render() {
 	    return (
-	    	<div> 
-	            <VideoPlayer
-	                autoplay = {true}
-	                src={this.state.video.src}
-	                width="720"
-	                height="420"
-	                display="block"
-                    marginLeft="auto"
-  					marginRight="auto"
-	            />
+	    	<div style={{textAlign: "center"}}>
+		    	<div style={{display: "inline-block", marginTop: "20px"}}> 
+		            <VideoPlayer
+		                autoplay = {true}
+		                src={this.state.video.src}
+		                height="420"
+		                style={{marginLeft:"20px"}}
+		            />
+		        </div>
 	        </div>
 	    )
   	}
