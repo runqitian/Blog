@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
@@ -175,16 +175,16 @@ class Page extends React.Component{
 	}
 
 	render(){
+		console.log(this.props);
 		return (
 			<Container maxWidth="md">
 				<Header/>
-				<div>
-				{/*{this.props.children}*/}
-					<Route exact path="/article/:id" component={ArticleBody} />
-					<Route exact path={['/resources']} component={ResourcesBody} />
-					<Route exact path={['/live']} component={LiveBody} />
-					<Route exact path={['/posts/:category', '/']} component={HomeBody} />
-				</div>
+					<Switch>
+						<Route exact path="/article/:id" component={ArticleBody} />
+						<Route exact path={['/resources']} component={ResourcesBody} />
+						<Route exact path={['/live']} component={LiveBody} />
+						<Route exact path={['/posts/:category', '/']} component={HomeBody} />
+					</Switch>
 			</Container>
 		)
 	}

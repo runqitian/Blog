@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import {Page, AdminPage, LoginPage} from './components/page'
 import LoadingIcon from "./components/loading"
 
@@ -50,15 +50,18 @@ const TokenRequired = () => {
 		return <LoadingIcon/>
 	}else{
 		if (status.auth === false){
-			window.location="/login"
+			var currLoc = window.location.pathname;
+			return <Redirect to={{
+			    pathname: "/login",
+				state: { prev: currLoc }
+			}} />
 		}else{
 			return (
-				<div>
+				<Switch>
 					<Route exact path={['/admin/resources', '/admin/article/*', '/admin/posts/*','/admin']} component={AdminPage} />
 					<Route exact path={['/live']} component={Page} />
-				</div>
+				</Switch>
 			)
-			// return <AdminPage/>
 		}
 	}
 }
@@ -78,10 +81,12 @@ class App extends React.Component{
 		return (
 			<div style={{"backgroundImage":"url(/blue-snow.png)", "backgroundRepeat": "repeat", "height":"100%", overflowX: "scroll"}}>
 				<Router>
-					<Route exact path={['/admin/resources', '/admin/article/*', '/admin/posts/*','/admin']} component={TokenRequired} />
-					<Route exact path={['/resources', '/article/*', '/posts/*', '/']} component={Page} />
-					<Route exact path={['/live']} component={TokenRequired} />
-					<Route exact path={['/login']} component={LoginPage} />
+					<Switch>
+						<Route exact path={['/admin/resources', '/admin/article/*', '/admin/posts/*','/admin']} component={TokenRequired} />
+						<Route exact path={['/resources', '/article/*', '/posts/*', '/']} component={Page} />
+						<Route exact path={['/live']} component={TokenRequired} />
+						<Route exact path={['/login']} component={LoginPage} />
+					</Switch>
 				</Router>
 			</div>
 		)
