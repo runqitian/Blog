@@ -35,7 +35,7 @@ class LoginPage extends React.Component{
 	    	if (response.status === 200){
 	    		response.json().then(data => {
 	    			localStorage.setItem('token', data['token']);
-	    			window.location = "/admin"
+	    			window.location = this.props.location.state.prev;
 	    		})
 	    	}else{
 	    		alert('login failed');
@@ -45,6 +45,7 @@ class LoginPage extends React.Component{
 	}
 
 	render(){
+		console.log(this.props);
 		return (
 			<Container maxWidth="md">
 				<form ref="form" onSubmit={this.handleSubmit}>

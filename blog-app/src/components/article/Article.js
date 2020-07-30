@@ -1,8 +1,8 @@
 import React from 'react'
-import ReactMarkdown from "react-markdown";
 import $ from 'jquery'
 import { Tag } from 'antd';
 import { Typography } from 'antd';
+
 
 class Article extends React.Component{
 	constructor(){
@@ -34,8 +34,13 @@ class Article extends React.Component{
 			var randomColor = Math.floor(Math.random()*16777215).toString(16);
 			return (<Tag color={"#" + randomColor} style={{'float': 'right'}} key={tag}>{tag}</Tag>)
 		})
+
+		const marked = require('marked');
+		var innerHtml = marked(this.state.content);
+
+		console.log(innerHtml);
 		return (
-			<div style={{'padding':'20px 50px 20px', 'objectFit':'cover', 'position':'relative'}}>
+			<div style={{'padding':'20px 50px 20px', 'objectFit':'cover', 'position':'relative', backgroundColor: "#FFFFFF"}}>
 				<div>
 					<Title style={{'paddingBottom':'20px', 'textAlign':'center'}}>{this.state.title}</Title>
 				</div>
@@ -43,7 +48,7 @@ class Article extends React.Component{
 					{tags}
 				</div>
 				<div style={{'paddingTop':'50px', 'objectFit':'cover', 'position':'relative'}}>
-					<ReactMarkdown source={this.state.content} escapeHtml={false}/>
+					<div className="content" dangerouslySetInnerHTML={{__html: innerHtml}}></div>
 				</div>
 			</div>
 		)
