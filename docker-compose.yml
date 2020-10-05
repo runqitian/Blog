@@ -37,3 +37,6 @@ services:
             - type: bind
               source: /opt/blog_share
               target: /opt/blog_share
+            - type: bind
+              source: /opt/blog_live
+              target: /opt/blog_live

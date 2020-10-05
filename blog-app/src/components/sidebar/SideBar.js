@@ -22,7 +22,7 @@ class SideBar extends React.Component{
 				})
 			}
 		})
-		console.log('sidebar mounted')
+		// console.log('sidebar mounted')
 	}
 
 	// componentDidUpdate(prevProps, prevState, snapshot) {
@@ -54,9 +54,9 @@ class SideBar extends React.Component{
 			    style={{"marginTop":"25px"}}
 			    dataSource={this.state.tags}
 			    renderItem={item => (
-			      <List.Item style={{"height":"60px"}} align="left">
+			      <List.Item style={{"height":"60px"}} align="center">
 			        <List.Item.Meta
-			          title={<Link to={tag_url + item.tag}><span>{item.tag}</span></Link>}
+			          title={<Link to={tag_url + item.tag}><span style={{'fontSize':'1.2em', 'fontWeight':'500'}}>{item.tag}</span></Link>}
 			        />
 			      </List.Item>
 			    )}

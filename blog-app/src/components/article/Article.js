@@ -2,7 +2,9 @@ import React from 'react'
 import $ from 'jquery'
 import { Tag } from 'antd';
 import { Typography } from 'antd';
-
+// import 'showdown-prettify'
+import showdown from 'showdown';
+import './Article.css'
 
 class Article extends React.Component{
 	constructor(){
@@ -34,11 +36,12 @@ class Article extends React.Component{
 			var randomColor = Math.floor(Math.random()*16777215).toString(16);
 			return (<Tag color={"#" + randomColor} style={{'float': 'right'}} key={tag}>{tag}</Tag>)
 		})
+		
+		var converter = new showdown.Converter();
+		converter.setOption('ghCodeBlocks', 'true');
+	    var innerHtml = converter.makeHtml(this.state.content);
 
-		const marked = require('marked');
-		var innerHtml = marked(this.state.content);
-
-		console.log(innerHtml);
+		// console.log(innerHtml);
 		return (
 			<div style={{'padding':'20px 50px 20px', 'objectFit':'cover', 'position':'relative', backgroundColor: "#FFFFFF"}}>
 				<div>
@@ -48,7 +51,7 @@ class Article extends React.Component{
 					{tags}
 				</div>
 				<div style={{'paddingTop':'50px', 'objectFit':'cover', 'position':'relative'}}>
-					<div className="content" dangerouslySetInnerHTML={{__html: innerHtml}}></div>
+					<div className="content" id="article" dangerouslySetInnerHTML={{__html: innerHtml}}></div>
 				</div>
 			</div>
 		)
