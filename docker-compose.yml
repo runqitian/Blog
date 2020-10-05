@@ -12,7 +12,7 @@ services:
               #source: /home/runqi/Workspace/Blog/db/
               #target: /docker-entrypoint-initdb.d/
             - type: bind
-              source: /opt/blogdb
+              source: /srv/blogdb
               target: /var/lib/mysql
     blog_backend:
         image: runqi/blog_backend
@@ -35,8 +35,8 @@ services:
             - "blog_backend"
         volumes:
             - type: bind
-              source: /opt/blog_share
-              target: /opt/blog_share
+              source: /srv/blog_share
+              target: /srv/blog_share
             - type: bind
-              source: /opt/blog_live
-              target: /opt/blog_live
+              source: /srv/blog_live
+              target: /srv/blog_live
