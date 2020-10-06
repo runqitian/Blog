@@ -39,6 +39,7 @@ class Article extends React.Component{
 		
 		var converter = new showdown.Converter();
 		converter.setOption('ghCodeBlocks', 'true');
+        converter.setOption('disableForced4SpacesIndentedSublists', 'true');
 	    var innerHtml = converter.makeHtml(this.state.content);
 
 		// console.log(innerHtml);
