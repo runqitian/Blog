@@ -34,7 +34,7 @@ class Header extends React.Component{
 						<h1>{header_title}</h1>
 					</Link>
 				</div>
-				<div style={{"position":"absolute", "bottom":"0px", "right":"0px", "backgroundColor":"transparent"}}>
+				<div style={{"position":"absolute", "bottom":"0px", "right":"10px", "backgroundColor":"transparent"}}>
 					<div className="MenuFontStyle" onClick={() => {window.location=header_link}}>
 						<p style={{"display":"inline", "userSelect": "none"}}>Blogs</p>
 					</div>

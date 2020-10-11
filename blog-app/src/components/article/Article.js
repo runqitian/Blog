@@ -44,7 +44,7 @@ class Article extends React.Component{
 
 		// console.log(innerHtml);
 		return (
-			<div style={{'padding':'20px 50px 20px', 'objectFit':'cover', 'position':'relative', backgroundColor: "#FFFFFF"}}>
+			<div style={{'padding':'20px 50px 5em', 'objectFit':'cover', 'position':'relative', backgroundColor: "#FFFFFF"}}>
 				<div>
 					<Title style={{'paddingBottom':'20px', 'textAlign':'center'}}>{this.state.title}</Title>
 				</div>
