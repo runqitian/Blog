@@ -3,10 +3,10 @@ services:
     blog_db:
         image: mysql
         container_name: "blog_db"
-        ports:
-            - "3306:3306"
+        #ports:
+        #    - "3306:3306"
         environment:
-            - MYSQL_ROOT_PASSWORD=trq371402
+            - MYSQL_ROOT_PASSWORD=#your password#
         volumes:
             #- type: bind
               #source: /home/runqi/Workspace/Blog/db/
@@ -17,8 +17,8 @@ services:
     blog_backend:
         image: runqi/blog_backend
         container_name: "blog_backend"
-        ports:
-            - "5000:5000"
+        #ports:
+        #    - "5000:5000"
         depends_on:
             - "blog_db"
         links:
