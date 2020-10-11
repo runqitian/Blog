@@ -40,3 +40,7 @@ services:
             - type: bind
               source: /srv/blog_live
               target: /srv/blog_live
+            - type: bind
+              source: /srv/blog_content
+              target: /srv/blog_content
+
