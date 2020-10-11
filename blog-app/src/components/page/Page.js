@@ -62,7 +62,7 @@ class HomeBody extends React.Component{
 				  spacing={3}
 				>
 				<Grid item md={3} sm={3} xs={12}>
-					<div style={{"padding":"10px 10px 10px"}}>
+					<div style={{"padding":"0.5em 0em 0.5em"}}>
 						<SideBar/>
 					</div>
 		        </Grid>

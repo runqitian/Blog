@@ -68,11 +68,11 @@ class BlogCard extends React.Component{
 		return (
 		    <Card className={"card"} style={{"backgroundImage":"url(/cloudy-day.png)"}}>
 		      <CardContent>
-		        <Typography variant="h5" component="h2" style={{"marginLeft":"20px"}}>
+		        <Typography variant="h5" component="h2" style={{"marginLeft":"20px", "fontSize": "min(6vw, 1.5em)"}}>
 					{this.props.title}
 		        </Typography>
 		        <br/>
-		        <Typography variant="body2" component="p" style={{"marginLeft":"20px"}}>
+		        <Typography variant="body2" component="p" style={{"marginLeft":"20px", "fontSize": "min(4vw, 1em)"}}>
 					{this.props.summary}
 		        </Typography>
 		      </CardContent>

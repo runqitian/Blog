@@ -51,12 +51,12 @@ class SideBar extends React.Component{
 		return (
 			<List
 			    itemLayout="horizontal"
-			    style={{"marginTop":"25px"}}
+			    style={{"marginTop":"1.5em"}}
 			    dataSource={this.state.tags}
 			    renderItem={item => (
-			      <List.Item style={{"height":"60px"}} align="center">
+			      <List.Item style={{"height":"3.5em"}} align="center">
 			        <List.Item.Meta
-			          title={<Link to={tag_url + item.tag}><span style={{'fontSize':'1.2em', 'fontWeight':'500'}}>{item.tag}</span></Link>}
+			          title={<Link to={tag_url + item.tag} ><span style={{'fontWeight':'500'}}>{item.tag}</span></Link>}
 			        />
 			      </List.Item>
 			    )}
