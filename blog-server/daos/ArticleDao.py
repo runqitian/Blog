@@ -92,6 +92,7 @@ class ArticleDao(DaoManager):
         suffix = ""
         if tag != None and tag != "":
             suffix = suffix + f' WHERE JSON_CONTAINS(tags, {repr(json.dumps(tag))})'
+        suffix = suffix + " ORDER BY id DESC"
         if limit != None:
             suffix = suffix + f" LIMIT {limit}"
         if offset != None:
