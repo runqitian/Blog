@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import BlogCard from "./BlogCard"
 import $ from 'jquery'
 import { Button } from 'antd';
+import "./Content.css"
 
 class Content extends React.Component{
 	
@@ -11,25 +12,35 @@ class Content extends React.Component{
 	constructor(){
 		super();
 		this.state = {
+			category: "",
+			limit: 0,
+			more: true,
 			blogs: []
 		}
+		this.loadMoreArticles = this.loadMoreArticles.bind(this);
 	}
 
 	componentDidMount(prevProps, prevState){
-		var category = ''
+		var category = "";
+		var limit = 6;
 		if (this.props.match.path === '/' || this.props.match.path === '/admin'){
-			category = ""
+			category = "";
 		}else{
-			category = this.props.match.params.category
+			category = this.props.match.params.category;
 		}
 		$.ajax({
 			url:'/api/blog/views',
 			data:{
-				tag: category
+				tag: category,
+				offset: 0,
+				limit: limit
 			},
 			success: (data) => {
 				this.setState({
-					blogs:data
+					category: category,
+					limit: data.length,
+					more: true,
+					blogs: data
 				})
 			}
 		})
@@ -49,12 +60,42 @@ class Content extends React.Component{
 		$.ajax({
 			url:'/api/blog/views',
 			data:{
-				tag: category
+				tag: category,
+				offset: 0,
+				limit: 6
 			},
 			success: (data) => {
 				this.setState({
-					blogs:data
+					category: category,
+					limit: data.length,
+					more: true,
+					blogs: data
 				})
+			}
+		})
+	}
+
+	loadMoreArticles(){
+		$.ajax({
+			url:'/api/blog/views',
+			data:{
+				tag: this.state.category,
+				offset: this.state.limit,
+				limit: 6
+			},
+			success: (data) => {
+				if (data.length !== 6){
+					this.setState({
+						limit: this.state.limit + data.length,
+						more: false,
+						blogs: this.state.blogs.concat(data)
+					})
+				}else{
+					this.setState({
+						limit: this.state.limit + data.length,
+						blogs: this.state.blogs.concat(data)
+					})
+				}
 			}
 		})
 	}
@@ -85,6 +126,19 @@ class Content extends React.Component{
 			)
 		}
 
+		var loadmore;
+		if (this.state.more){
+			loadmore = 
+			<div className="ReadMoreFontStyle" style={{"marginTop": "1em", "marginBottom": "2em", "fontSize":"min(5vw, 1.2em)"}}>
+				<span onClick={this.loadMoreArticles}>Read More</span>
+			</div>
+		}else{
+			loadmore = 
+			<div className="EndFontStyle" style={{"marginTop": "1em", "marginBottom": "2em", "fontSize":"min(5vw, 1.2em)"}}>
+				<span>Reach the end</span>
+			</div>
+		}
+
 		return (
 			<Grid
 				container
@@ -94,6 +148,7 @@ class Content extends React.Component{
 			  	spacing={3}
 			>
 				{cards}
+				{loadmore}
 			</Grid>
 		)
 	}

@@ -68,7 +68,9 @@ class HomeBody extends React.Component{
 		        </Grid>
 		        <Grid item md={9} sm={9} xs={12}>
 					<div style={{"padding":"10px 10px 10px"}}>
-						<Route exact path={['/posts/:category', '/']} component={Content} />
+						<Switch>
+							<Route exact path={['/posts/:category', '/']} component={Content} />
+						</Switch>
 					</div>
 		        </Grid>
 				</Grid>
@@ -179,12 +181,12 @@ class Page extends React.Component{
 		return (
 			<Container maxWidth="md">
 				<Header/>
-					<Switch>
-						<Route exact path="/article/:id" component={ArticleBody} />
-						<Route exact path={['/resources']} component={ResourcesBody} />
-						<Route exact path={['/live']} component={LiveBody} />
-						<Route exact path={['/posts/:category', '/']} component={HomeBody} />
-					</Switch>
+				<Switch>
+					<Route exact path="/article/:id" component={ArticleBody} />
+					<Route exact path={['/resources']} component={ResourcesBody} />
+					<Route exact path={['/live']} component={LiveBody} />
+					<Route exact path={['/posts/:category', '/']} component={HomeBody} />
+				</Switch>
 			</Container>
 		)
 	}

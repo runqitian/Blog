@@ -1,0 +1,20 @@
+.ReadMoreFontStyle {
+	vertical-align: middle;
+	text-align: center;
+	display: inline;
+	font-size: min(4vw, 1.4em);
+	user-select: none;
+}
+
+.ReadMoreFontStyle:hover {
+	color: #0099ff;
+	cursor: pointer;
+}
+
+.EndFontStyle {
+	vertical-align: middle;
+	text-align: center;
+	display: inline;
+	font-size: min(4vw, 1.4em);
+	user-select: none;
+}
