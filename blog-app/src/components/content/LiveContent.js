@@ -14,11 +14,11 @@ class LiveContent extends React.Component {
   	render() {
 	    return (
 	    	<div style={{textAlign: "center"}}>
-		    	<div style={{display: "inline-block", paddingTop: "20px"}}> 
+		    	<div style={{display: "inline-block", paddingTop: "2vh"}}> 
 		            <VideoPlayer
 		                autoplay = {true}
 		                src={this.state.video.src}
-		                height = "400px"
+		                fluid = "true"
 		            />
 		        </div>
 	        </div>
